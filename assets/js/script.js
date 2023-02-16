@@ -156,4 +156,55 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }
 
   });
+
+  // 
+  // 
+
+  // function to show full screen image
+  function showImage(imgSrc, caption) {
+  // create overlay element
+  const overlay = document.createElement('div');
+  overlay.classList.add('overlay');
+
+  // create full screen image element
+  const fullScreenImage = document.createElement('div');
+  fullScreenImage.classList.add('full-screen-image');
+  const img = document.createElement('img');
+  img.setAttribute('src', imgSrc);
+  fullScreenImage.appendChild(img);
+
+  // create caption element
+  const captionElem = document.createElement('div');
+  captionElem.classList.add('full-screen-caption');
+  captionElem.innerText = caption;
+  fullScreenImage.appendChild(captionElem);
+
+  // create close button
+  const closeButton = document.createElement('div');
+  closeButton.classList.add('close-button');
+  closeButton.innerHTML = '&times;';
+  fullScreenImage.appendChild(closeButton);
+
+  // add full screen image to overlay
+  overlay.appendChild(fullScreenImage);
+
+  // add overlay to document body
+  document.body.appendChild(overlay);
+
+  // close button click event
+  closeButton.addEventListener('click', function() {
+    document.body.removeChild(overlay);
+  });
+}
+
+// click event for images
+const projectImages = document.querySelectorAll('.project-item .project-img');
+for (let i = 0; i < projectImages.length; i++) {
+  projectImages[i].addEventListener('click', function() {
+    const imgSrc = this.querySelector('img').getAttribute('src');
+    const caption = this.nextElementSibling.innerText;
+    showImage(imgSrc, caption);
+  });
+}
+
 }
